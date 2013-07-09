@@ -1,9 +1,27 @@
 var express = require('express');
+var fs = require('fs');
 
 var app = express.createServer(express.logger());
 
+var filename = "index.html";
+
 app.get('/', function(request, response) {
-  response.send('Hello World 2!');
+
+fs.readFile(filename, function(err, data) {
+
+        if (err instanceof Error) {
+                console.log("Error opening + " + filename);
+		response.send("Can't find index.html<br />\n");  
+      } else {
+                data = new Buffer(data);
+                /* console.log(data.toString()); */
+		 response.send(data); 
+
+        }
+});
+
+ //response.send('Hello World 2!'); 
+
 });
 
 var port = process.env.PORT || 5000;
