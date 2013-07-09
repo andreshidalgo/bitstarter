@@ -13,9 +13,15 @@ fs.readFile(filename, function(err, data) {
                 console.log("Error opening + " + filename);
 		response.send("Can't find index.html<br />\n");  
       } else {
-                data = new Buffer(data);
+                msg = new Buffer(data);
                 /* console.log(data.toString()); */
-		 response.send(data); 
+		 //response.send(msg); 
+
+
+	response.setHeader("Content-Type", "text/html");
+
+	response.send(msg);
+
 
         }
 });
